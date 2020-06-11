@@ -1,0 +1,75 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" charset="UTF-8" />
+    <title>Login</title>
+    <script src="~/Scripts/layui/layui.js"></script>
+    <link href="~/Scripts/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/Scripts/login/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/login/login-xin.js"></script>
+    <link href="~/Content/login.css" rel="stylesheet" />
+    <script>
+        
+    </script>
+</head>
+<body onload="createCode();">
+    <div class="login">
+        <div class="login-head">
+            <div class="login-head-a">
+                <img src="../Images/a.jpg" title="" alt="" />
+            </div>
+            <div class="login-head-b">
+                寝室管理系统
+            </div>
+        </div>
+        <div class="login-con">
+            <div class="login-a">
+                <form id="loginForm" method="post" action="/Home/LoginFul" onsubmit="return validate()">
+                    <div class="login-b">
+                        <div class="login-b-a">管理员登录</div>
+                        <div class="login-b-b" style="margin-left:50px">
+                            <ul>
+                                <li>
+                                    <label for="userName">用户名：</label><input type="text" id="mobile" name="AdminNumber" />
+                                    <h1 id="m-tip"></h1>
+                                </li>
+                                <li>
+                                    <label for="password">密 &nbsp;&nbsp;码：</label><input type="password" id="password" name="AdminPwd" />
+                                    <h1 id="p-tip"></h1>
+                                </li>
+                                <li>
+                                    <label>验证码：</label><input type="text" id="input1" />
+                                    <input type="text" id="checkCode" class="code" style="width: 55px" readonly="readonly" />
+                                    <a href="#" onclick="createCode()">看不清楚</a>
+                                    <h1 id="c-tip"></h1>
+
+                                    <!--输入错误时的输入框样式<input type="text" name="textfield" id="textfield" class="receSum-error" />-->
+                                    <!--当输入的手机号码发生错误时，出现如下提示信息
+                                   <p class="error-tips-1 spanRed">在此处显示错误的信息提示——如：对不起，您输入的手机号码格式有误，请重新输入！</p>-->
+
+                                </li>
+                                <li class="login-x">
+                                    <div class="login-x-a">
+                                        <input type="submit" name="登录" value="登录" id="Button1" onclick="validate();" /><div class="x"></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        @*                        <div class="login-b-c">
+                            <a href="#">免费接入</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">忘记登录密码？</a>
+                        </div>*@
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="login-foot">
+            平顶山工业职业技术学院寝室管理系统（水库路三号院）
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,437 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DormitoryDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="DormitoryDBModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="DormitoryDBModel.Store.Admin" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Arrive" EntityType="DormitoryDBModel.Store.Arrive" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Distribution" EntityType="DormitoryDBModel.Store.Distribution" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="HostelNotice" EntityType="DormitoryDBModel.Store.HostelNotice" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Hygiene" EntityType="DormitoryDBModel.Store.Hygiene" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Register" EntityType="DormitoryDBModel.Store.Register" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Repairs" EntityType="DormitoryDBModel.Store.Repairs" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="DormitoryDBModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Arrive_Distribution" Association="DormitoryDBModel.Store.FK_Arrive_Distribution">
+            <End Role="Distribution" EntitySet="Distribution" />
+            <End Role="Arrive" EntitySet="Arrive" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hygiene_Distribution" Association="DormitoryDBModel.Store.FK_Hygiene_Distribution">
+            <End Role="Distribution" EntitySet="Distribution" />
+            <End Role="Hygiene" EntitySet="Hygiene" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Register_Distribution" Association="DormitoryDBModel.Store.FK_Register_Distribution">
+            <End Role="Distribution" EntitySet="Distribution" />
+            <End Role="Register" EntitySet="Register" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Repairs_Distribution" Association="DormitoryDBModel.Store.FK_Repairs_Distribution">
+            <End Role="Distribution" EntitySet="Distribution" />
+            <End Role="Repairs" EntitySet="Repairs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="AdminID" />
+          </Key>
+          <Property Name="AdminID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AdminNumber" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="AdminPwd" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Arrive">
+          <Key>
+            <PropertyRef Name="ArriveID" />
+          </Key>
+          <Property Name="ArriveID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ArriveName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="DistributionID" Type="int" Nullable="false" />
+          <Property Name="ArriveTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Distribution">
+          <Key>
+            <PropertyRef Name="DistributionID" />
+          </Key>
+          <Property Name="DistributionID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DistributionNum" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="DistributionName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="DistributionImg" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="DistributionAcademic" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="DistributionGoods" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="DistributionTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HostelNotice">
+          <Key>
+            <PropertyRef Name="HostelNoticeID" />
+          </Key>
+          <Property Name="HostelNoticeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="HostelNoticeTitle" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="HostelNoticeCont" Type="nvarchar" Nullable="false" MaxLength="1000" />
+          <Property Name="HostelNoticeTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Hygiene">
+          <Key>
+            <PropertyRef Name="HygieneID" />
+          </Key>
+          <Property Name="HygieneID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="HygieneType" Type="nvarchar" MaxLength="10" />
+          <Property Name="DistributionID" Type="int" />
+        </EntityType>
+        <EntityType Name="Register">
+          <Key>
+            <PropertyRef Name="RegisterID" />
+          </Key>
+          <Property Name="RegisterID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RegisterName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="RegisterGoods" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="DistributionID" Type="int" Nullable="false" />
+          <Property Name="RegisterType" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="RegisterTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Repairs">
+          <Key>
+            <PropertyRef Name="RepairsID" />
+          </Key>
+          <Property Name="RepairsID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DistributionID" Type="int" />
+          <Property Name="RepairsDescribe" Type="nvarchar" MaxLength="50" />
+          <Property Name="RepairsTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Arrive_Distribution">
+          <End Role="Distribution" Type="DormitoryDBModel.Store.Distribution" Multiplicity="1" />
+          <End Role="Arrive" Type="DormitoryDBModel.Store.Arrive" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Distribution">
+              <PropertyRef Name="DistributionID" />
+            </Principal>
+            <Dependent Role="Arrive">
+              <PropertyRef Name="DistributionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hygiene_Distribution">
+          <End Role="Distribution" Type="DormitoryDBModel.Store.Distribution" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Hygiene" Type="DormitoryDBModel.Store.Hygiene" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Distribution">
+              <PropertyRef Name="DistributionID" />
+            </Principal>
+            <Dependent Role="Hygiene">
+              <PropertyRef Name="DistributionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Register_Distribution">
+          <End Role="Distribution" Type="DormitoryDBModel.Store.Distribution" Multiplicity="1" />
+          <End Role="Register" Type="DormitoryDBModel.Store.Register" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Distribution">
+              <PropertyRef Name="DistributionID" />
+            </Principal>
+            <Dependent Role="Register">
+              <PropertyRef Name="DistributionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Repairs_Distribution">
+          <End Role="Distribution" Type="DormitoryDBModel.Store.Distribution" Multiplicity="0..1" />
+          <End Role="Repairs" Type="DormitoryDBModel.Store.Repairs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Distribution">
+              <PropertyRef Name="DistributionID" />
+            </Principal>
+            <Dependent Role="Repairs">
+              <PropertyRef Name="DistributionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DormitoryDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DormitoryDBEntitie" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Admin" EntityType="DormitoryDBModel.Admin" />
+          <EntitySet Name="Arrive" EntityType="DormitoryDBModel.Arrive" />
+          <EntitySet Name="Distribution" EntityType="DormitoryDBModel.Distribution" />
+          <EntitySet Name="HostelNotice" EntityType="DormitoryDBModel.HostelNotice" />
+          <EntitySet Name="Hygiene" EntityType="DormitoryDBModel.Hygiene" />
+          <EntitySet Name="Register" EntityType="DormitoryDBModel.Register" />
+          <EntitySet Name="Repairs" EntityType="DormitoryDBModel.Repairs" />
+          <EntitySet Name="sysdiagrams" EntityType="DormitoryDBModel.sysdiagrams" />
+          <AssociationSet Name="FK_Arrive_Distribution" Association="DormitoryDBModel.FK_Arrive_Distribution">
+            <End Role="Distribution" EntitySet="Distribution" />
+            <End Role="Arrive" EntitySet="Arrive" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hygiene_Distribution" Association="DormitoryDBModel.FK_Hygiene_Distribution">
+            <End Role="Distribution" EntitySet="Distribution" />
+            <End Role="Hygiene" EntitySet="Hygiene" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Register_Distribution" Association="DormitoryDBModel.FK_Register_Distribution">
+            <End Role="Distribution" EntitySet="Distribution" />
+            <End Role="Register" EntitySet="Register" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Repairs_Distribution" Association="DormitoryDBModel.FK_Repairs_Distribution">
+            <End Role="Distribution" EntitySet="Distribution" />
+            <End Role="Repairs" EntitySet="Repairs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="AdminID" />
+          </Key>
+          <Property Name="AdminID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="AdminNumber" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="AdminPwd" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Arrive">
+          <Key>
+            <PropertyRef Name="ArriveID" />
+          </Key>
+          <Property Name="ArriveID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ArriveName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="DistributionID" Type="Int32" Nullable="false" />
+          <Property Name="ArriveTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Distribution" Relationship="DormitoryDBModel.FK_Arrive_Distribution" FromRole="Arrive" ToRole="Distribution" />
+        </EntityType>
+        <EntityType Name="Distribution">
+          <Key>
+            <PropertyRef Name="DistributionID" />
+          </Key>
+          <Property Name="DistributionID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="DistributionNum" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="DistributionName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="DistributionImg" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="DistributionAcademic" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="DistributionGoods" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="DistributionTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Arrive" Relationship="DormitoryDBModel.FK_Arrive_Distribution" FromRole="Distribution" ToRole="Arrive" />
+          <NavigationProperty Name="Hygiene" Relationship="DormitoryDBModel.FK_Hygiene_Distribution" FromRole="Distribution" ToRole="Hygiene" />
+          <NavigationProperty Name="Register" Relationship="DormitoryDBModel.FK_Register_Distribution" FromRole="Distribution" ToRole="Register" />
+          <NavigationProperty Name="Repairs" Relationship="DormitoryDBModel.FK_Repairs_Distribution" FromRole="Distribution" ToRole="Repairs" />
+        </EntityType>
+        <EntityType Name="HostelNotice">
+          <Key>
+            <PropertyRef Name="HostelNoticeID" />
+          </Key>
+          <Property Name="HostelNoticeID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="HostelNoticeTitle" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="HostelNoticeCont" Type="String" Nullable="false" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="HostelNoticeTime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Hygiene">
+          <Key>
+            <PropertyRef Name="HygieneID" />
+          </Key>
+          <Property Name="HygieneID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="HygieneType" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="DistributionID" Type="Int32" />
+          <NavigationProperty Name="Distribution" Relationship="DormitoryDBModel.FK_Hygiene_Distribution" FromRole="Hygiene" ToRole="Distribution" />
+        </EntityType>
+        <EntityType Name="Register">
+          <Key>
+            <PropertyRef Name="RegisterID" />
+          </Key>
+          <Property Name="RegisterID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="RegisterName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="RegisterGoods" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="DistributionID" Type="Int32" Nullable="false" />
+          <Property Name="RegisterType" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="RegisterTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Distribution" Relationship="DormitoryDBModel.FK_Register_Distribution" FromRole="Register" ToRole="Distribution" />
+        </EntityType>
+        <EntityType Name="Repairs">
+          <Key>
+            <PropertyRef Name="RepairsID" />
+          </Key>
+          <Property Name="RepairsID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="DistributionID" Type="Int32" />
+          <Property Name="RepairsDescribe" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="RepairsTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Distribution" Relationship="DormitoryDBModel.FK_Repairs_Distribution" FromRole="Repairs" ToRole="Distribution" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Arrive_Distribution">
+          <End Role="Distribution" Type="DormitoryDBModel.Distribution" Multiplicity="1" />
+          <End Role="Arrive" Type="DormitoryDBModel.Arrive" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Distribution">
+              <PropertyRef Name="DistributionID" />
+            </Principal>
+            <Dependent Role="Arrive">
+              <PropertyRef Name="DistributionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hygiene_Distribution">
+          <End Role="Distribution" Type="DormitoryDBModel.Distribution" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Hygiene" Type="DormitoryDBModel.Hygiene" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Distribution">
+              <PropertyRef Name="DistributionID" />
+            </Principal>
+            <Dependent Role="Hygiene">
+              <PropertyRef Name="DistributionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Register_Distribution">
+          <End Role="Distribution" Type="DormitoryDBModel.Distribution" Multiplicity="1" />
+          <End Role="Register" Type="DormitoryDBModel.Register" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Distribution">
+              <PropertyRef Name="DistributionID" />
+            </Principal>
+            <Dependent Role="Register">
+              <PropertyRef Name="DistributionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Repairs_Distribution">
+          <End Role="Distribution" Type="DormitoryDBModel.Distribution" Multiplicity="0..1" />
+          <End Role="Repairs" Type="DormitoryDBModel.Repairs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Distribution">
+              <PropertyRef Name="DistributionID" />
+            </Principal>
+            <Dependent Role="Repairs">
+              <PropertyRef Name="DistributionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DormitoryDBModelStoreContainer" CdmEntityContainer="DormitoryDBEntitie">
+          <EntitySetMapping Name="Admin">
+            <EntityTypeMapping TypeName="DormitoryDBModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+                <ScalarProperty Name="AdminNumber" ColumnName="AdminNumber" />
+                <ScalarProperty Name="AdminPwd" ColumnName="AdminPwd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Arrive">
+            <EntityTypeMapping TypeName="DormitoryDBModel.Arrive">
+              <MappingFragment StoreEntitySet="Arrive">
+                <ScalarProperty Name="ArriveID" ColumnName="ArriveID" />
+                <ScalarProperty Name="ArriveName" ColumnName="ArriveName" />
+                <ScalarProperty Name="DistributionID" ColumnName="DistributionID" />
+                <ScalarProperty Name="ArriveTime" ColumnName="ArriveTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Distribution">
+            <EntityTypeMapping TypeName="DormitoryDBModel.Distribution">
+              <MappingFragment StoreEntitySet="Distribution">
+                <ScalarProperty Name="DistributionID" ColumnName="DistributionID" />
+                <ScalarProperty Name="DistributionNum" ColumnName="DistributionNum" />
+                <ScalarProperty Name="DistributionName" ColumnName="DistributionName" />
+                <ScalarProperty Name="DistributionImg" ColumnName="DistributionImg" />
+                <ScalarProperty Name="DistributionAcademic" ColumnName="DistributionAcademic" />
+                <ScalarProperty Name="DistributionGoods" ColumnName="DistributionGoods" />
+                <ScalarProperty Name="DistributionTime" ColumnName="DistributionTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HostelNotice">
+            <EntityTypeMapping TypeName="DormitoryDBModel.HostelNotice">
+              <MappingFragment StoreEntitySet="HostelNotice">
+                <ScalarProperty Name="HostelNoticeID" ColumnName="HostelNoticeID" />
+                <ScalarProperty Name="HostelNoticeTitle" ColumnName="HostelNoticeTitle" />
+                <ScalarProperty Name="HostelNoticeCont" ColumnName="HostelNoticeCont" />
+                <ScalarProperty Name="HostelNoticeTime" ColumnName="HostelNoticeTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hygiene">
+            <EntityTypeMapping TypeName="DormitoryDBModel.Hygiene">
+              <MappingFragment StoreEntitySet="Hygiene">
+                <ScalarProperty Name="HygieneID" ColumnName="HygieneID" />
+                <ScalarProperty Name="HygieneType" ColumnName="HygieneType" />
+                <ScalarProperty Name="DistributionID" ColumnName="DistributionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Register">
+            <EntityTypeMapping TypeName="DormitoryDBModel.Register">
+              <MappingFragment StoreEntitySet="Register">
+                <ScalarProperty Name="RegisterID" ColumnName="RegisterID" />
+                <ScalarProperty Name="RegisterName" ColumnName="RegisterName" />
+                <ScalarProperty Name="RegisterGoods" ColumnName="RegisterGoods" />
+                <ScalarProperty Name="DistributionID" ColumnName="DistributionID" />
+                <ScalarProperty Name="RegisterType" ColumnName="RegisterType" />
+                <ScalarProperty Name="RegisterTime" ColumnName="RegisterTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Repairs">
+            <EntityTypeMapping TypeName="DormitoryDBModel.Repairs">
+              <MappingFragment StoreEntitySet="Repairs">
+                <ScalarProperty Name="RepairsID" ColumnName="RepairsID" />
+                <ScalarProperty Name="DistributionID" ColumnName="DistributionID" />
+                <ScalarProperty Name="RepairsDescribe" ColumnName="RepairsDescribe" />
+                <ScalarProperty Name="RepairsTime" ColumnName="RepairsTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DormitoryDBModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

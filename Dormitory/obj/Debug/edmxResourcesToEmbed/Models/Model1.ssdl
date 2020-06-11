@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DormitoryDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="DormitoryDBModelStoreContainer">
+    <EntitySet Name="Admin" EntityType="DormitoryDBModel.Store.Admin" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Arrive" EntityType="DormitoryDBModel.Store.Arrive" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Distribution" EntityType="DormitoryDBModel.Store.Distribution" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="HostelNotice" EntityType="DormitoryDBModel.Store.HostelNotice" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Hygiene" EntityType="DormitoryDBModel.Store.Hygiene" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Register" EntityType="DormitoryDBModel.Store.Register" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Repairs" EntityType="DormitoryDBModel.Store.Repairs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="sysdiagrams" EntityType="DormitoryDBModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Arrive_Distribution" Association="DormitoryDBModel.Store.FK_Arrive_Distribution">
+      <End Role="Distribution" EntitySet="Distribution" />
+      <End Role="Arrive" EntitySet="Arrive" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Hygiene_Distribution" Association="DormitoryDBModel.Store.FK_Hygiene_Distribution">
+      <End Role="Distribution" EntitySet="Distribution" />
+      <End Role="Hygiene" EntitySet="Hygiene" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Register_Distribution" Association="DormitoryDBModel.Store.FK_Register_Distribution">
+      <End Role="Distribution" EntitySet="Distribution" />
+      <End Role="Register" EntitySet="Register" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Repairs_Distribution" Association="DormitoryDBModel.Store.FK_Repairs_Distribution">
+      <End Role="Distribution" EntitySet="Distribution" />
+      <End Role="Repairs" EntitySet="Repairs" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="AdminID" />
+    </Key>
+    <Property Name="AdminID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="AdminNumber" Type="nvarchar" Nullable="false" MaxLength="10" />
+    <Property Name="AdminPwd" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Arrive">
+    <Key>
+      <PropertyRef Name="ArriveID" />
+    </Key>
+    <Property Name="ArriveID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ArriveName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="DistributionID" Type="int" Nullable="false" />
+    <Property Name="ArriveTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Distribution">
+    <Key>
+      <PropertyRef Name="DistributionID" />
+    </Key>
+    <Property Name="DistributionID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="DistributionNum" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="DistributionName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="DistributionImg" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="DistributionAcademic" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="DistributionGoods" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="DistributionTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HostelNotice">
+    <Key>
+      <PropertyRef Name="HostelNoticeID" />
+    </Key>
+    <Property Name="HostelNoticeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="HostelNoticeTitle" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="HostelNoticeCont" Type="nvarchar" Nullable="false" MaxLength="1000" />
+    <Property Name="HostelNoticeTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Hygiene">
+    <Key>
+      <PropertyRef Name="HygieneID" />
+    </Key>
+    <Property Name="HygieneID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="HygieneType" Type="nvarchar" MaxLength="10" />
+    <Property Name="DistributionID" Type="int" />
+  </EntityType>
+  <EntityType Name="Register">
+    <Key>
+      <PropertyRef Name="RegisterID" />
+    </Key>
+    <Property Name="RegisterID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="RegisterName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="RegisterGoods" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="DistributionID" Type="int" Nullable="false" />
+    <Property Name="RegisterType" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="RegisterTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Repairs">
+    <Key>
+      <PropertyRef Name="RepairsID" />
+    </Key>
+    <Property Name="RepairsID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="DistributionID" Type="int" />
+    <Property Name="RepairsDescribe" Type="nvarchar" MaxLength="50" />
+    <Property Name="RepairsTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_Arrive_Distribution">
+    <End Role="Distribution" Type="DormitoryDBModel.Store.Distribution" Multiplicity="1" />
+    <End Role="Arrive" Type="DormitoryDBModel.Store.Arrive" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Distribution">
+        <PropertyRef Name="DistributionID" />
+      </Principal>
+      <Dependent Role="Arrive">
+        <PropertyRef Name="DistributionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Hygiene_Distribution">
+    <End Role="Distribution" Type="DormitoryDBModel.Store.Distribution" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Hygiene" Type="DormitoryDBModel.Store.Hygiene" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Distribution">
+        <PropertyRef Name="DistributionID" />
+      </Principal>
+      <Dependent Role="Hygiene">
+        <PropertyRef Name="DistributionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Register_Distribution">
+    <End Role="Distribution" Type="DormitoryDBModel.Store.Distribution" Multiplicity="1" />
+    <End Role="Register" Type="DormitoryDBModel.Store.Register" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Distribution">
+        <PropertyRef Name="DistributionID" />
+      </Principal>
+      <Dependent Role="Register">
+        <PropertyRef Name="DistributionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Repairs_Distribution">
+    <End Role="Distribution" Type="DormitoryDBModel.Store.Distribution" Multiplicity="0..1" />
+    <End Role="Repairs" Type="DormitoryDBModel.Store.Repairs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Distribution">
+        <PropertyRef Name="DistributionID" />
+      </Principal>
+      <Dependent Role="Repairs">
+        <PropertyRef Name="DistributionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

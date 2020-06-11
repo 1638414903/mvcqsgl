@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="42bbca267a8a4e97a13df4ccb1aebaf5" Name="关系图1">
+        <EntityTypeShape EntityType="DormitoryDBModel.Admin" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DormitoryDBModel.Arrive" Width="1.5" PointX="1.125" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DormitoryDBModel.Distribution" Width="1.5" PointX="3.875" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DormitoryDBModel.HostelNotice" Width="1.5" PointX="8.125" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DormitoryDBModel.Hygiene" Width="1.5" PointX="7.5" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DormitoryDBModel.Register" Width="1.5" PointX="7.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DormitoryDBModel.Repairs" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DormitoryDBModel.sysdiagrams" Width="1.5" PointX="11.25" PointY="2.125" IsExpanded="true" />
+        <AssociationConnector Association="DormitoryDBModel.FK_Arrive_Distribution" ManuallyRouted="false" />
+        <AssociationConnector Association="DormitoryDBModel.FK_Hygiene_Distribution" ManuallyRouted="false" />
+        <AssociationConnector Association="DormitoryDBModel.FK_Register_Distribution" ManuallyRouted="false" />
+        <AssociationConnector Association="DormitoryDBModel.FK_Repairs_Distribution" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

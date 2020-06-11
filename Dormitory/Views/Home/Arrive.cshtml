@@ -1,0 +1,137 @@
+﻿@{
+    ViewBag.Title = "Arrive";
+    Layout = "~/Views/Shared/_LayoutScript.cshtml";
+}
+@using Dormitory.Models;
+<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+<!--[if lt IE 9]>
+      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+      <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+<div class="x-nav">
+    <span class="layui-breadcrumb">
+        <a href="">首页</a>
+        <a href="">寝室管理</a>
+        <a>
+            <cite>学生分配</cite></a>
+    </span>
+    <a class="layui-btn layui-btn-small" style="line-height: 1.6em; margin-top: 3px; float: right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height: 30px">ဂ</i></a>
+</div>
+<div class="x-body">
+    <div class="layui-row">
+        <form class="layui-form layui-col-md12 x-so">
+            <input type="text" name="username" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+            <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+        </form>
+    </div>
+    <xblock>
+        <button class="layui-btn" onclick="x_admin_show('添加用户','/Home/Dis_Add')"><i class="layui-icon"></i>添加</button>
+        <span class="x-right" style="line-height:40px">共有数据：<span style="color:red">@ViewBag.count</span>条</span>
+      </xblock>
+    <table id="tab" class="layui-table" lay-data="{url:'/Home/Dispose'}" lay-filter="test">
+    </table>
+</div>
+<script>
+    layui.use(['table', 'layer', 'laypage'], function () {
+        var layer = layui.layer,
+            table = layui.table,
+            laypage = layui.laypage;
+        //第一个实例
+        table.render({
+            elem: '#tab'
+          , limits: [2, 4, 6, 8, 10]
+          , height: 400
+          , page: true //开启分页
+          , url: '/Home/Arrive_list' //数据接口
+          , cols: [[ //表头 x.Distribution.DistributionImg, x.Distribution.DistributionAcademic 
+              { field: 'ArriveID', title: '编号', width: 236, height: 100, align: 'center' }
+            , { field: 'ArriveName', title: '姓名', width: 236, height: 100, align: 'center' }
+            , { field: 'DistributionAcademic', title: '学号', width: 236, height: 100, align: 'center' }
+            , { field: 'DistributionImg', title: '头像', width: 236, height: 100, templet: '<div>{{Img(d.DistributionImg)}}<div>', align: 'center' }
+            , { field: 'DistributionNum', title: '寝室号', width: 236, height: 100, align: 'center' }          
+            , { field: 'ArriveTime', title: '旷寝时间', width: 236, height: 100, templet: '<div>{{Format(d.ArriveTime,"yyyy-MM-dd hh:mm:ss")}}</div>', align: 'center' }
+            , { field: 'cz', title: '操作', width: 233, toolbar: '#barDemo', height: 100, align: 'center' }
+          ]]
+        }); 
+        //监听工具条 
+        table.on('tool', function (obj) { //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+            var data = obj.data; //获得当前行数据
+            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            var tr = obj.tr; //获得当前行 tr 的 DOM 对象（如果有的话）
+            if (layEvent === 'del') { //删除
+                layer.confirm('真的删除行么', function (index) {
+                    if (index) {
+                        //确认删除时执行
+                        $.ajax({
+                            url: '/Home/Del',
+                            type: 'get',
+                            data: { id: data.DistributionID },
+                            success: function (res) {
+                                if (res == "ok") {
+                                    location.replace(location.href);//从新加载该页面
+                                } else {
+                                    alert("失败")
+                                }
+                            }
+                        })
+                        layer.close(index);
+                    } else {
+                        alert()
+                    }
+                });
+            } else if (layEvent === 'edit') {
+                //编辑
+                $.ajax({
+
+                })
+                layer.close(index);
+            }
+        });
+        //结束
+    });
+        //时间戳显示方法
+        function Format(datetime, fmt) {
+            datetime = parseInt(datetime.substr(6))
+            if (parseInt(datetime) == datetime) {
+                if (datetime.length == 10) {
+                    datetime = parseInt(datetime) * 1000;
+                } else if (datetime.length == 13) {
+                    datetime = parseInt(datetime);
+                }
+            }
+            datetime = new Date(datetime);
+            var o = {
+                "M+": datetime.getMonth() + 1,                 //月份   
+                "d+": datetime.getDate(),                    //日   
+                "h+": datetime.getHours(),                   //小时   
+                "m+": datetime.getMinutes(),                 //分   
+                "s+": datetime.getSeconds(),                 //秒   
+                "q+": Math.floor((datetime.getMonth() + 3) / 3), //季度   
+                "S": datetime.getMilliseconds()             //毫秒   
+            };
+            if (/(y+)/.test(fmt))
+                fmt = fmt.replace(RegExp.$1, (datetime.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt))
+                    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        }
+        //图片格式化器
+        function Img(img) {
+            return '<img src="../Images/' + img + '"  style="height:60px"/>';
+        }
+</script>
+@*操作按钮*@
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script>var _hmt = _hmt || []; (function () {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
